@@ -1,1 +1,3 @@
-# figma-style-ui-showcase-95858
+# Project Repository
+
+This is the initial README file for the project.
