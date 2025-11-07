@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // PUBLIC_INTERFACE
 export default function Canvas() {
@@ -9,6 +10,11 @@ export default function Canvas() {
         <h1 style={styles.title}>Canvas coming soon</h1>
         <p style={styles.subtitle}>
           This area will host the interactive canvas and components.
+        </p>
+        <p>
+          <Link to="/canvas/aaf-inicio-copy-2" style={styles.link}>
+            Open AAF_inicio Copy 2 →
+          </Link>
         </p>
       </div>
     </div>
@@ -43,5 +49,10 @@ const styles = {
   subtitle: {
     marginTop: '10px',
     color: '#374151',
+  },
+  link: {
+    color: '#2563EB',
+    fontWeight: 700,
+    textDecoration: 'none',
   },
 };

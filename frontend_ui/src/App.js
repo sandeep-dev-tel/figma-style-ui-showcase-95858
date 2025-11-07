@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import Canvas from './pages/Canvas';
+import CanvasAAFInicioCopy2 from './pages/CanvasAAFInicioCopy2';
 
 // PUBLIC_INTERFACE
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/canvas" element={<Canvas />} />
+          <Route path="/canvas/aaf-inicio-copy-2" element={<CanvasAAFInicioCopy2 />} />
         </Routes>
       </BrowserRouter>
     </div>
