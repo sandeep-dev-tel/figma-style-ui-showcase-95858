@@ -1,0 +1,125 @@
+/* Screen: AAF_inicio Copy 2 (2001:3396) */
+/* Root */
+#screen-aafinicio-copy-2 {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  background: var(--style-0-bg);
+  color: var(--typo-157-color);
+}
+
+/* Level-1 groups relative to root (root x:-3276, y:35187) */
+#grp-highlights { position: absolute; left: 20px; top: 152px; width: 1940px; height: 444px; z-index: 1; }
+#grp-segui-viendo { position: absolute; left: 57px; top: 632px; width: 2251px; height: 368px; z-index: 2; }
+#grp-canales-tv { position: absolute; left: 88px; top: 1040px; width: 2318px; height: 277px; z-index: 3; }
+#grp-header { position: absolute; left: 88.72px; top: 36px; width: 1466.2799px; height: 74px; z-index: 4; }
+
+/* Highlights children (within grp-highlights; parent at -3296,35339) */
+#highlightA { position: absolute; left: 0px; top: 0px; width: 68px; height: 444px; z-index: 1; }
+#highlightA-mask1, #highlightA-mask2 { position: absolute; left: 0px; top: 0px; width: 68px; height: 444px; background: var(--style-2-bg); }
+#highlightB2 { position: absolute; left: 108px; top: 0px; width: 1744px; height: 444px; z-index: 2; } /* -3188 - (-3296) = 108 */
+#highlightB-image { position: absolute; left: 0px; top: 0px; width: 1744px; height: 444px; background: var(--style-3-bg); border-radius: var(--style-3-radius); box-shadow: var(--style-3-shadow); }
+#highlightC { position: absolute; left: 1892px; top: 0px; width: 48px; height: 444px; z-index: 3; } /* -1404 - (-3296) = 1892 */
+#highlightC-mask1, #highlightC-mask2 { position: absolute; left: 0px; top: 0px; width: 48px; height: 444px; background: var(--style-2-bg); }
+
+/* Seguí viendo */
+#sv-title { position: absolute; left: 0px; top: 0px; width: 182px; height: 32px; }
+
+#sv-card-1 { position: absolute; left: 0px; top: 39px; width: 474px; height: 329px; z-index: 1; }
+#sv-card-1-image { position: absolute; left: 0px; top: 0px; width: 474px; height: 267px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#sv-card-1-prog { position: absolute; left: 19.558px; top: 230.172px; width: 436.034px; height: 18.414px; }
+#sv-card-1-prog-track { position: absolute; left: 0px; top: 0px; width: 436.034px; height: 18.414px; background: var(--style-78-bg); }
+#sv-card-1-prog-fill { position: absolute; left: 4.600px; top: 4.601px; width: 176.004px; height: 9.207px; background: var(--style-79-bg); }
+#sv-card-1-namebar { position: absolute; left: 31px; top: 249px; width: 412px; height: 80px; background: var(--style-41-bg); }
+#sv-card-1-title { position: absolute; left: 47px; top: 273px; width: 270px; height: 32px; }
+
+#sv-delete { position: absolute; left: 420.956px; top: 312.223px; width: 31.429px; height: 34.286px; z-index: 5; }
+#sv-yellow { position: absolute; left: 357.0px; top: 319.199px; width: 20px; height: 20px; border-radius: 50%; background: var(--style-81-bg); }
+
+#sv-card-2 { position: absolute; left: 483px; top: 56px; width: 412px; height: 312px; z-index: 2; }
+#sv-card-2-image { position: absolute; left: 0px; top: 0px; width: 412px; height: 232px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#sv-card-2-prog { position: absolute; left: 17px; top: 200px; width: 379px; height: 16px; }
+#sv-card-2-prog-track { position: absolute; left: 0px; top: 0px; width: 379px; height: 16px; background: var(--style-20-bg); }
+#sv-card-2-prog-fill { position: absolute; left: 4px; top: 4px; width: 153.047px; height: 8px; background: var(--style-21-bg); }
+#sv-card-2-namebar { position: absolute; left: 0px; top: 232px; width: 412px; height: 80px; background: var(--style-41-bg); }
+#sv-card-2-title { position: absolute; left: 16px; top: 24px; width: 270px; height: 32px; }
+
+#sv-card-3 { position: absolute; left: 935px; top: 56px; width: 412px; height: 312px; z-index: 3; }
+#sv-card-3-image { position: absolute; left: 0px; top: 0px; width: 412px; height: 232px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#sv-card-3-prog { position: absolute; left: 17px; top: 200px; width: 379px; height: 16px; }
+#sv-card-3-prog-track { position: absolute; left: 0px; top: 0px; width: 379px; height: 16px; background: var(--style-20-bg); }
+#sv-card-3-prog-fill { position: absolute; left: 4px; top: 4px; width: 153.047px; height: 8px; background: var(--style-21-bg); }
+#sv-card-3-namebar { position: absolute; left: 0px; top: 232px; width: 412px; height: 80px; background: var(--style-41-bg); }
+#sv-card-3-title { position: absolute; left: 16px; top: 24px; width: 270px; height: 32px; }
+
+#sv-card-4 { position: absolute; left: 1387px; top: 56px; width: 412px; height: 312px; z-index: 4; }
+#sv-card-4-image { position: absolute; left: 0px; top: 0px; width: 412px; height: 232px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#sv-card-4-prog { position: absolute; left: 17px; top: 200px; width: 379px; height: 16px; }
+#sv-card-4-prog-track { position: absolute; left: 0px; top: 0px; width: 379px; height: 16px; background: var(--style-20-bg); }
+#sv-card-4-prog-fill { position: absolute; left: 4px; top: 4px; width: 153.047px; height: 8px; background: var(--style-21-bg); }
+#sv-card-4-namebar { position: absolute; left: 0px; top: 232px; width: 412px; height: 80px; background: var(--style-41-bg); }
+#sv-card-4-title { position: absolute; left: 16px; top: 24px; width: 270px; height: 32px; }
+
+#sv-card-5 { position: absolute; left: 1839px; top: 56px; width: 412px; height: 312px; z-index: 5; }
+#sv-card-5-image { position: absolute; left: 0px; top: 0px; width: 412px; height: 232px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#sv-card-5-prog { position: absolute; left: 17px; top: 200px; width: 379px; height: 16px; }
+#sv-card-5-prog-track { position: absolute; left: 0px; top: 0px; width: 379px; height: 16px; background: var(--style-20-bg); }
+#sv-card-5-prog-fill { position: absolute; left: 4px; top: 4px; width: 153.047px; height: 8px; background: var(--style-21-bg); }
+#sv-card-5-namebar { position: absolute; left: 0px; top: 232px; width: 412px; height: 80px; background: var(--style-41-bg); }
+#sv-card-5-title { position: absolute; left: 16px; top: 24px; width: 270px; height: 32px; }
+
+/* Canales de TV */
+#ctv-title { position: absolute; left: 0px; top: 0px; width: 205px; height: 32px; }
+
+#ctv-card-1 { position: absolute; left: -1px; top: 56px; width: 745px; height: 212px; }
+#ctv-card-1-image { position: absolute; left: 0px; top: 0px; width: 377px; height: 212px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#ctv-card-1-prog { position: absolute; left: 15px; top: 192px; width: 207px; height: 10.4px; }
+#ctv-card-1-prog-track { position: absolute; left: 0px; top: 0px; width: 207px; height: 10.4px; background: var(--style-11-bg); }
+#ctv-card-1-prog-fill { position: absolute; left: 0.8px; top: 0.8px; width: 80px; height: 8.8px; background: var(--style-12-bg); }
+#ctv-card-1-playwrap { position: absolute; left: 268px; top: 103px; width: 91.693px; height: 91.693px; box-shadow: var(--style-282-shadow); }
+#ctv-card-1-play-ellipse { position: absolute; left: 0px; top: 0px; width: 91.693px; height: 91.693px; border-radius: 50%; background: var(--style-13-bg); border: var(--style-13-border); }
+#ctv-card-1-meta { position: absolute; left: 408px; top: 12px; width: 337px; height: 186px; }
+#ctv-card-1-livepill { position: absolute; left: 52px; top: 104px; width: 94px; height: 32px; background: var(--style-8-bg); border-radius: var(--style-8-radius); }
+
+#ctv-card-2 { position: absolute; left: 745px; top: 56px; width: 745px; height: 221px; }
+#ctv-card-2-image { position: absolute; left: 0px; top: 4px; width: 377px; height: 212px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#ctv-card-2-prog { position: absolute; left: 16px; top: 197px; width: 207px; height: 10.4px; }
+#ctv-card-2-prog-track { position: absolute; left: 0px; top: 0px; width: 207px; height: 10.4px; background: var(--style-11-bg); }
+#ctv-card-2-prog-fill { position: absolute; left: 0.8px; top: 0.8px; width: 80px; height: 8.8px; background: var(--style-12-bg); }
+#ctv-card-2-playwrap { position: absolute; left: 1006px; top: 107px; width: 91.693px; height: 91.693px; box-shadow: var(--style-282-shadow); }
+#ctv-card-2-play-ellipse { position: absolute; left: 0px; top: 0px; width: 91.693px; height: 91.693px; border-radius: 50%; background: var(--style-13-bg); border: var(--style-13-border); }
+#ctv-card-2-meta { position: absolute; left: 1208px; top: 16px; width: 337px; height: 205px; }
+#ctv-card-2-livepill { position: absolute; left: 226px; top: 109px; width: 94px; height: 32px; background: var(--style-8-bg); border-radius: var(--style-8-radius); }
+
+#ctv-card-3 { position: absolute; left: 1573px; top: 56px; width: 745px; height: 212px; }
+#ctv-card-3-image { position: absolute; left: 0px; top: 0px; width: 377px; height: 212px; background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+#ctv-card-3-prog { position: absolute; left: 15px; top: 189px; width: 207px; height: 10.4px; }
+#ctv-card-3-prog-track { position: absolute; left: 0px; top: 0px; width: 207px; height: 10.4px; background: var(--style-11-bg); }
+#ctv-card-3-prog-fill { position: absolute; left: 0.8px; top: 0.8px; width: 80px; height: 8.8px; background: var(--style-12-bg); }
+#ctv-card-3-playwrap { position: absolute; left: 1841px; top: 100px; width: 91.693px; height: 91.693px; box-shadow: var(--style-282-shadow); }
+#ctv-card-3-play-ellipse { position: absolute; left: 0px; top: 0px; width: 91.693px; height: 91.693px; border-radius: 50%; background: var(--style-13-bg); border: var(--style-13-border); }
+#ctv-card-3-meta { position: absolute; left: 1613px; top: 12px; width: 337px; height: 186px; }
+#ctv-card-3-livepill { position: absolute; left: 53px; top: 113px; width: 94px; height: 32px; background: var(--style-8-bg); border-radius: var(--style-8-radius); }
+
+/* Header internals relative positioning */
+#hdr-topnav { position: absolute; left: 396px; top: 0px; width: 1159px; height: 74px; }
+#hdr-topnav-bg { position: absolute; left: 0px; top: 4px; width: 1159px; height: 64px; }
+#hdr-avatarfocus { position: absolute; left: 1077.28px; top: 0px; width: 74px; height: 74px; border: var(--style-26-border); background: var(--style-26-bg); border-radius: 50%; }
+#hdr-avatar { position: absolute; left: 1086.28px; top: 8px; width: 56px; height: 56px; border-radius: 50%; background: var(--style-1-bg); }
+#hdr-search { position: absolute; left: 20px; top: 18px; width: 36px; height: 36px; }
+#hdr-nav-inicio { position: absolute; left: 90px; top: 19px; width: 72px; height: 34px; color: var(--style-34-color); }
+#hdr-nav-peliculas { position: absolute; left: 210px; top: 19px; width: 120px; height: 34px; color: var(--style-34-color); }
+#hdr-nav-series { position: absolute; left: 380px; top: 19px; width: 82px; height: 34px; color: var(--style-34-color); }
+#hdr-nav-tvvivo { position: absolute; left: 512px; top: 19px; width: 137px; height: 34px; color: var(--style-34-color); }
+#hdr-nav-kids { position: absolute; left: 697px; top: 19px; width: 58px; height: 34px; color: var(--style-34-color); }
+#hdr-nav-mis { position: absolute; left: 804px; top: 19px; width: 207px; height: 34px; color: var(--style-34-color); }
+#hdr-active { position: absolute; left: 97px; top: 10px; width: 96px; height: 53px; }
+#hdr-active-bg { position: absolute; left: 0px; top: 0px; width: 96px; height: 53px; }
+#hdr-active-title { position: absolute; left: 12px; top: 10px; width: 74px; height: 32px; }
+#hdr-logo { position: absolute; left: 0px; top: 16px; width: 169.637px; height: 34.356px; }
+
+/* Generic helpers for shapes/icons */
+.rect { position: absolute; }
+.icon { position: absolute; image-rendering: -webkit-optimize-contrast; }
+.ellipse { border-radius: 50%; }

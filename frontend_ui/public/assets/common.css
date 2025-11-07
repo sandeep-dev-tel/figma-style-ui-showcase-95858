@@ -1,0 +1,217 @@
+:root {
+  /* Colors (placeholders; update from design_system) */
+  --color-121212: #121212;
+  --color-primary: #e53e3e;
+  --color-secondary: #38a169;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-yellow: #f6e05e;
+
+  /* Typography tokens (placeholders; update sizes/weights/colors) */
+  --typo-157-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --typo-157-size: 24px;
+  --typo-157-weight: 700;
+  --typo-157-line-height: 1.333;
+  --typo-157-letter-spacing: 0px;
+  --typo-157-color: var(--color-white);
+  --typo-158-family: var(--typo-157-family);
+  --typo-158-size: 28px;
+  --typo-158-weight: 700;
+  --typo-158-line-height: 1.25;
+  --typo-158-letter-spacing: 0px;
+  --typo-158-color: var(--color-white);
+  --typo-159-family: var(--typo-157-family);
+  --typo-159-size: 18px;
+  --typo-159-weight: 500;
+  --typo-159-line-height: 1.3;
+  --typo-159-letter-spacing: 0px;
+  --typo-159-color: rgba(255,255,255,.8);
+  --typo-160-family: var(--typo-157-family);
+  --typo-160-size: 14px;
+  --typo-160-weight: 700;
+  --typo-160-line-height: 1.2;
+  --typo-160-letter-spacing: 0.5px;
+  --typo-160-color: var(--color-black);
+  --typo-165-family: var(--typo-157-family);
+  --typo-165-size: 20px;
+  --typo-165-weight: 600;
+  --typo-165-line-height: 1.2;
+  --typo-165-letter-spacing: 0px;
+  --typo-165-color: var(--color-white);
+  --typo-166-family: var(--typo-157-family);
+  --typo-166-size: 20px;
+  --typo-166-weight: 700;
+  --typo-166-line-height: 1.2;
+  --typo-166-letter-spacing: 0px;
+  --typo-166-color: var(--color-white);
+  --typo-167-family: var(--typo-157-family);
+  --typo-167-size: 20px;
+  --typo-167-weight: 600;
+  --typo-167-line-height: 1.2;
+  --typo-167-letter-spacing: 0px;
+  --typo-167-color: var(--color-white);
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 20px rgba(0,0,0,0.25);
+
+  /* Styles (placeholders reflecting usage) */
+  /* style_0 root frame background */
+  --style-0-bg: var(--color-121212);
+  --style-0-radius: 0px;
+  --style-0-shadow: none;
+  --style-0-border: none;
+  --style-0-opacity: 1;
+
+  /* style_1 neutral clear group/frame */
+  --style-1-bg: transparent;
+  --style-1-radius: 0px;
+  --style-1-shadow: none;
+  --style-1-border: none;
+  --style-1-opacity: 1;
+
+  /* style_2 masks (likely gradient or solid) */
+  --style-2-bg: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+  --style-2-radius: 0px;
+  --style-2-shadow: none;
+  --style-2-border: none;
+  --style-2-opacity: 1;
+
+  /* style_3 highlight image placeholder */
+  --style-3-bg: #333333;
+  --style-3-radius: 8px;
+  --style-3-shadow: var(--shadow-lg);
+  --style-3-border: none;
+  --style-3-opacity: 1;
+
+  /* style_7 vector/icon fill (white) */
+  --style-7-fill: var(--color-white);
+
+  /* style_8 pill badge bg (live) */
+  --style-8-bg: #F56565; /* red-ish live */
+  --style-8-radius: 6px;
+
+  /* style_9 generic image block bg */
+  --style-9-bg: #444444;
+  --style-9-radius: 8px;
+  --style-9-shadow: var(--shadow-md);
+
+  /* style_11 progress track bg */
+  --style-11-bg: rgba(255,255,255,0.25);
+  --style-12 progress fill bg */
+  --style-12-bg: var(--color-white);
+
+  /* style_13 circular play ring */
+  --style-13-bg: rgba(0,0,0,0.55);
+  --style-13-border: 2px solid rgba(255,255,255,0.7);
+
+  /* style_14 tag background */
+  --style-14-bg: #FFD166;
+  --style-14-radius: 4px;
+
+  /* style_15 tag icon fill */
+  --style-15-fill: #1A202C;
+
+  /* style_20 progress track (alt) */
+  --style-20-bg: rgba(255,255,255,0.25);
+  /* style_21 progress fill (alt) */
+  --style-21-bg: var(--color-white);
+
+  /* style_23 header bar bg */
+  --style-23-bg: rgba(0,0,0,0.5);
+  --style-23-radius: 12px;
+
+  /* style_26 avatar focus ring */
+  --style-26-border: 2px solid #E53E3E;
+  --style-26-bg: transparent;
+
+  /* style_31 search icon container */
+  --style-31-fill: var(--color-white);
+  --style-32 search union */
+  --style-32-fill: var(--color-white);
+  --style-33 search path fill */
+  --style-33-fill: var(--color-white);
+
+  /* style_34 nav text color override */
+  --style-34-color: var(--color-white);
+
+  /* style_36 logo icon fill */
+  --style-36-fill: var(--color-white);
+  --style-37 logo internal fill */
+  --style-37-fill: var(--color-white);
+
+  /* style_38 active nav background */
+  --style-38-bg: rgba(255,255,255,0.08);
+  --style-38-radius: 8px;
+
+  /* style_41 name/title background bar */
+  --style-41-bg: rgba(0,0,0,0.6);
+  --style-41-radius: 0px;
+
+  /* style_78 large progress track */
+  --style-78-bg: rgba(255,255,255,0.2);
+  /* style_79 large progress fill */
+  --style-79-bg: var(--color-white);
+
+  /* style_81 yellow control circle */
+  --style-81-bg: var(--color-yellow);
+
+  /* style_282 circular shadow group */
+  --style-282-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+/* Reset and base */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-121212);
+  color: var(--color-white);
+  font-family: var(--typo-157-family);
+}
+.figma-screen {
+  position: relative;
+  overflow: hidden;
+}
+.abs { position: absolute; }
+.hide-text { text-indent: -9999px; overflow: hidden; white-space: nowrap; }
+
+/* Helpers mapping style refs */
+.bg-style-0 { background: var(--style-0-bg); opacity: var(--style-0-opacity); }
+.bg-style-1 { background: var(--style-1-bg); opacity: var(--style-1-opacity); }
+.bg-style-2 { background: var(--style-2-bg); }
+.bg-style-3 { background: var(--style-3-bg); border-radius: var(--style-3-radius); box-shadow: var(--style-3-shadow); }
+.bg-style-8 { background: var(--style-8-bg); border-radius: var(--style-8-radius); }
+.bg-style-9 { background: var(--style-9-bg); border-radius: var(--style-9-radius); box-shadow: var(--style-9-shadow); }
+.bg-style-11 { background: var(--style-11-bg); }
+.bg-style-12 { background: var(--style-12-bg); }
+.bg-style-13 { background: var(--style-13-bg); border: var(--style-13-border); }
+.bg-style-14 { background: var(--style-14-bg); border-radius: var(--style-14-radius); }
+.bg-style-20 { background: var(--style-20-bg); }
+.bg-style-21 { background: var(--style-21-bg); }
+.bg-style-23 { background: var(--style-23-bg); border-radius: var(--style-23-radius); }
+.bg-style-38 { background: var(--style-38-bg); border-radius: var(--style-38-radius); }
+.bg-style-41 { background: var(--style-41-bg); }
+.bg-style-78 { background: var(--style-78-bg); }
+.bg-style-79 { background: var(--style-79-bg); }
+.bg-style-81 { background: var(--style-81-bg); }
+
+/* Ellipse-specific helpers */
+.ellipse { border-radius: 50%; }
+
+/* Typography helpers */
+.typo-157 { font-family: var(--typo-157-family); font-size: var(--typo-157-size); font-weight: var(--typo-157-weight); line-height: var(--typo-157-line-height); letter-spacing: var(--typo-157-letter-spacing); color: var(--typo-157-color); }
+.typo-158 { font-family: var(--typo-158-family); font-size: var(--typo-158-size); font-weight: var(--typo-158-weight); line-height: var(--typo-158-line-height); letter-spacing: var(--typo-158-letter-spacing); color: var(--typo-158-color); }
+.typo-159 { font-family: var(--typo-159-family); font-size: var(--typo-159-size); font-weight: var(--typo-159-weight); line-height: var(--typo-159-line-height); letter-spacing: var(--typo-159-letter-spacing); color: var(--typo-159-color); }
+.typo-160 { font-family: var(--typo-160-family); font-size: var(--typo-160-size); font-weight: var(--typo-160-weight); line-height: var(--typo-160-line-height); letter-spacing: var(--typo-160-letter-spacing); color: var(--typo-160-color); }
+.typo-165 { font-family: var(--typo-165-family); font-size: var(--typo-165-size); font-weight: var(--typo-165-weight); line-height: var(--typo-165-line-height); letter-spacing: var(--typo-165-letter-spacing); color: var(--typo-165-color); }
+.typo-166 { font-family: var(--typo-166-family); font-size: var(--typo-166-size); font-weight: var(--typo-166-weight); line-height: var(--typo-166-line-height); letter-spacing: var(--typo-166-letter-spacing); color: var(--typo-166-color); }
+.typo-167 { font-family: var(--typo-167-family); font-size: var(--typo-167-size); font-weight: var(--typo-167-weight); line-height: var(--typo-167-line-height); letter-spacing: var(--typo-167-letter-spacing); color: var(--typo-167-color); }

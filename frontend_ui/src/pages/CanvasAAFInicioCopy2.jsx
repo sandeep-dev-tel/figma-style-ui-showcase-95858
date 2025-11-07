@@ -3,17 +3,26 @@ import React, { useEffect, useRef, useState } from 'react';
 // PUBLIC_INTERFACE
 export default function CanvasAAFInicioCopy2() {
   /** Renders the AAF_inicio Copy 2 static HTML content within a React page.
-   *  - Loads HTML from /assets/aafinicio-copy-2-2001-3396.html and injects into a scoped wrapper.
-   *  - Dynamically injects CSS /assets/aafinicio-copy-2-2001-3396.css and removes on unmount.
-   *  - Dynamically injects JS /assets/aafinicio-copy-2-2001-3396.js and removes on unmount.
-   *  - Centers and scales the 1920x1080 artboard responsively inside the viewport.
-   *  - Guards against global CSS leakage by using a data-attribute wrapper and only adding a page-specific <link>.
-   *  - Mitigates ResizeObserver loop warnings by debouncing/throttling callbacks and disconnecting on unmount.
+   *  - Safely loads an HTML fragment (avoids injecting full documents).
+   *  - Validates response content-type and URL to guard against dev-server index.html fallbacks.
+   *  - Uses PUBLIC_URL-aware asset paths so CRA serves from /public/assets.
+   *  - Loads CSS and JS with content-type checks and robust console warnings on fallbacks.
+   *  - Ensures cleanup removes injected nodes.
+   *  - Centers and scales the 1920x1080 artboard responsively.
    */
   const wrapperRef = useRef(null);
   const [html, setHtml] = useState('');
   const linkRefs = useRef([]);
   const scriptRef = useRef(null);
+
+  // Derive base public assets path (CRA serves files from public/)
+  const PUBLIC_URL = process.env.PUBLIC_URL || '';
+  const assetsBase = `${PUBLIC_URL}/assets`;
+  const FRAGMENT_HTML_URL = `${assetsBase}/aafinicio-copy-2-2001-3396.fragment.html`; // preferred fragment
+  const FULL_HTML_URL = `${assetsBase}/aafinicio-copy-2-2001-3396.html`; // fallback if fragment missing
+  const CSS_COMMON_URL = `${assetsBase}/common.css`;
+  const CSS_PAGE_URL = `${assetsBase}/aafinicio-copy-2-2001-3396.css`;
+  const JS_URL = `${assetsBase}/aafinicio-copy-2-2001-3396.js`;
 
   // Utility: debounce with RAF fallback to avoid ResizeObserver loop saturation
   const createRafDebounce = (fn, delay = 50) => {
@@ -39,43 +48,97 @@ export default function CanvasAAFInicioCopy2() {
     return debounced;
   };
 
-  // Load the HTML as text and inject into the wrapper
+  // Helpers to identify content types
+  const isHtmlContentType = (ct) => typeof ct === 'string' && ct.toLowerCase().includes('text/html');
+  const isJsContentType = (ct) =>
+    typeof ct === 'string' &&
+    (ct.toLowerCase().includes('application/javascript') || ct.toLowerCase().includes('text/javascript'));
+
+  // Extract only the inner content of a known container from a full document string
+  const extractKnownContainerHtml = (docString) => {
+    try {
+      const temp = document.createElement('html');
+      temp.innerHTML = docString;
+      // Prefer specific screen container
+      const target =
+        temp.querySelector('#screen-aafinicio-copy-2') ||
+        temp.querySelector('main') ||
+        temp.querySelector('#root') ||
+        temp.querySelector('body');
+      return target ? target.outerHTML : '';
+    } catch {
+      return '';
+    }
+  };
+
+  // Load the HTML fragment with robust checks
   useEffect(() => {
     let isActive = true;
 
     async function loadHtml() {
-      try {
-        const res = await fetch('/assets/aafinicio-copy-2-2001-3396.html', { cache: 'no-cache' });
+      const warn = (...args) => console.warn('[CanvasAAFInicioCopy2]', ...args);
+
+      // Try fragment first
+      const tryFetch = async (url, expectHtml = true) => {
+        const res = await fetch(url, { cache: 'no-cache' });
+        const ct = res.headers.get('content-type') || '';
         if (!res.ok) {
-          // If dev server returned index.html or an error page, content-type might be text/html; check basic signal
-          const ct = res.headers.get('content-type') || '';
-          if (!ct.includes('text/html')) {
-            throw new Error(`Unexpected content-type: ${ct}`);
-          }
+          warn(`Fetch not OK for ${url} (status ${res.status}). CT: ${ct}`);
         }
         const text = await res.text();
+        return { text, ct, ok: res.ok };
+      };
 
-        // If this is a whole document, parse safely and extract main; otherwise assume it's just fragment
-        const temp = document.createElement('div');
-        temp.innerHTML = text;
+      try {
+        // 1) Attempt to load the dedicated fragment file
+        const frag = await tryFetch(FRAGMENT_HTML_URL, true);
 
-        // Most likely path: index.html is returned => has <html> and <body>; we only want our main
-        const main = temp.querySelector('#screen-aafinicio-copy-2');
-        if (main && isActive) {
-          setHtml(main.outerHTML);
-        } else if (isActive) {
-          // Basic guard: if the text starts with "<!DOCTYPE" or "<html", it's likely entire doc from dev server,
-          // which means wrong path or mis-served asset; avoid injecting it to prevent "Unexpected token <" downstream usage.
-          const isWholeDoc = /^\s*<!DOCTYPE|^\s*<html/i.test(text);
-          if (isWholeDoc) {
-            console.error('Received a full HTML document instead of the expected fragment. Check asset path.');
-            setHtml('<div style="color:#fff;padding:16px;">Failed to load canvas content. Please check static asset path.</div>');
+        if (frag.ok && (!isHtmlContentType(frag.ct) || !/^\s*<!doctype|^\s*<html/i.test(frag.text))) {
+          // The fragment should NOT be a full document; if it looks like one, treat carefully
+          const looksFullDoc = /^\s*<!DOCTYPE|^\s*<html/i.test(frag.text);
+          if (looksFullDoc) {
+            warn(`Fragment at ${FRAGMENT_HTML_URL} appears to be a full document; skipping fragment path.`);
           } else {
-            setHtml(text);
+            if (isActive) setHtml(frag.text);
+            return;
+          }
+        } else {
+          warn(`Fragment ${FRAGMENT_HTML_URL} not found or content-type is ${frag.ct}. Will try full HTML.`);
+        }
+
+        // 2) Fall back to the full HTML and extract the known container
+        const full = await tryFetch(FULL_HTML_URL, true);
+        const isDocLike = isHtmlContentType(full.ct) || /<html/i.test(full.text);
+        if (!isDocLike) {
+          warn(`Full HTML at ${FULL_HTML_URL} does not look like HTML (ct=${full.ct}). Will attempt raw inject as last resort.`);
+        }
+
+        let extracted = '';
+        if (isDocLike) {
+          extracted = extractKnownContainerHtml(full.text);
+          if (!extracted) {
+            warn(`Could not extract known container from ${FULL_HTML_URL}. Will do minimal sanitation and fallback.`);
+          }
+        }
+
+        if (isActive) {
+          if (extracted) {
+            setHtml(extracted);
+          } else {
+            // Minimal sanitation: strip doctype/html/head/body wrappers if present
+            const sanitized = full.text
+              .replace(/<!DOCTYPE[\s\S]*?>/gi, '')
+              .replace(/<\/?html[\s\S]*?>/gi, '')
+              .replace(/<\/?head[\s\S]*?>/gi, '')
+              .replace(/<\/?body[\s\S]*?>/gi, '')
+              .trim();
+            // Warn that fallback sanitation was used
+            warn('Falling back to sanitized HTML injection due to unexpected structure.');
+            setHtml(sanitized || '<div style="color:#fff;padding:16px;">Failed to load canvas content.</div>');
           }
         }
       } catch (e) {
-        console.error('Failed to load canvas HTML:', e);
+        console.error('[CanvasAAFInicioCopy2] Failed to load canvas HTML:', e);
         if (isActive) {
           setHtml('<div style="color:#fff;padding:16px;">Error loading canvas content.</div>');
         }
@@ -95,54 +158,83 @@ export default function CanvasAAFInicioCopy2() {
     const attachLink = (href, dataTag) => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = href; // absolute path ensures CRA serves from public/
+      link.href = href; // served from public/
       link.setAttribute('data-canvas-style', dataTag);
       document.head.appendChild(link);
       links.push(link);
     };
 
-    // Add common then page-specific CSS
-    attachLink('/assets/common.css', 'aaf-inicio-copy-2-common');
-    attachLink('/assets/aafinicio-copy-2-2001-3396.css', 'aaf-inicio-copy-2');
+    // Add common then page-specific CSS using PUBLIC_URL-aware paths
+    attachLink(CSS_COMMON_URL, 'aaf-inicio-copy-2-common');
+    attachLink(CSS_PAGE_URL, 'aaf-inicio-copy-2');
 
     linkRefs.current = links;
 
     return () => {
       // Cleanup all appended links
-      linkRefs.current.forEach(l => {
+      linkRefs.current.forEach((l) => {
         if (l && l.parentNode) l.parentNode.removeChild(l);
       });
       linkRefs.current = [];
     };
-  }, []);
+  }, [CSS_COMMON_URL, CSS_PAGE_URL]);
 
-  // Inject JS script only when the HTML is mounted; clean up on unmount to avoid multiple inits
+  // Inject JS script only when the HTML is mounted; validate content-type before execution
   useEffect(() => {
     if (!html) return;
+    let cancelled = false;
 
-    const script = document.createElement('script');
-    script.src = '/assets/aafinicio-copy-2-2001-3396.js';
-    script.async = true;
-    script.defer = true;
-    script.setAttribute('data-canvas-script', 'aaf-inicio-copy-2');
+    const attachScript = async () => {
+      try {
+        // Try HEAD request to inspect content-type without downloading the entire file
+        const headRes = await fetch(JS_URL, { method: 'HEAD', cache: 'no-cache' });
+        const ct = headRes.headers.get('content-type') || '';
+        if (!headRes.ok || !isJsContentType(ct)) {
+          console.warn(
+            '[CanvasAAFInicioCopy2] Skipping JS injection due to invalid content-type or response.',
+            { url: JS_URL, status: headRes.status, contentType: ct }
+          );
+          return;
+        }
+      } catch (err) {
+        console.warn('[CanvasAAFInicioCopy2] HEAD check failed for JS. Will attempt to fetch and inspect.', err);
+        // As a fallback, we'll still attach the script with onerror handler below.
+      }
 
-    const onError = () => {
-      console.error('Failed to load canvas script at /assets/aafinicio-copy-2-2001-3396.js');
+      if (cancelled) return;
+
+      const script = document.createElement('script');
+      script.src = JS_URL;
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-canvas-script', 'aaf-inicio-copy-2');
+
+      const onError = (e) => {
+        console.error(`[CanvasAAFInicioCopy2] Failed to load canvas script at ${JS_URL}`, e);
+      };
+      script.addEventListener('error', onError);
+
+      document.body.appendChild(script);
+      scriptRef.current = script;
     };
-    script.addEventListener('error', onError);
 
-    document.body.appendChild(script);
-    scriptRef.current = script;
+    attachScript();
 
     return () => {
+      cancelled = true;
       if (scriptRef.current) {
-        scriptRef.current.removeEventListener('error', onError);
-        if (scriptRef.current.parentNode) {
-          scriptRef.current.parentNode.removeChild(scriptRef.current);
+        // Remove event listeners and node
+        try {
+          scriptRef.current.replaceWith();
+        } catch {
+          if (scriptRef.current.parentNode) {
+            scriptRef.current.parentNode.removeChild(scriptRef.current);
+          }
         }
+        scriptRef.current = null;
       }
     };
-  }, [html]);
+  }, [html, JS_URL]);
 
   // Resize handling: center and scale the fixed-size 1920x1080 artboard with debounced observer
   useEffect(() => {
@@ -172,12 +264,10 @@ export default function CanvasAAFInicioCopy2() {
     });
 
     if (wrapperRef.current) {
-      // Observe wrapper size changes only (not the entire subtree) to reduce loops
       ro.observe(wrapperRef.current);
     }
 
     window.addEventListener('resize', debouncedCompute);
-    // Initial calculation scheduled
     debouncedCompute();
 
     return () => {
@@ -185,7 +275,7 @@ export default function CanvasAAFInicioCopy2() {
       debouncedCompute.cancel();
       try {
         ro.disconnect();
-      } catch (e) {
+      } catch {
         // noop
       }
     };
@@ -195,13 +285,10 @@ export default function CanvasAAFInicioCopy2() {
     <div style={styles.page}>
       <div style={styles.container}>
         <div style={styles.canvasWrapper} ref={wrapperRef} id="aaf-inicio-copy-2-canvas" data-canvas-wrapper>
-          <div
-            data-artboard
-            style={styles.artboardScaleWrapper}
-          >
+          <div data-artboard style={styles.artboardScaleWrapper}>
             <div
               data-scope="aaf-inicio-copy-2"
-              // Dangerously inject only the <main> content or fallback HTML (already sanitized in asset)
+              // Dangerously inject only sanitized or extracted fragment HTML
               dangerouslySetInnerHTML={{ __html: html }}
             />
           </div>
